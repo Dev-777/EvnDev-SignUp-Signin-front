@@ -1,25 +1,56 @@
 import React, { useState } from "react";
 import style from "../assets/styles/signUp.module.scss";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { CommonLoading } from "react-loadingg";
 
 const SignUp = () => {
-  const [state, setState] = useState({});
+  const history = useHistory();
+  const initialState = {
+    firstName: " ",
+    lastName: " ",
+    email: " ",
+    phone: " ",
+    password: " ",
+    showLoading: false,
+  };
+  const [state, setState] = useState(initialState);
+  const { firstName, lastName, email, phone, password } = state;
+
   const onchangeFunc = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  console.log(state, "state");
-
   const signUpFunc = () => {
-    axios
-      .post("http://localhost:4000/app/signup", state)
-      .then((res) => console.log(res.data, "res~~~"));
+    if (firstName && lastName && email && phone.length > 1 && password) {
+      setState({ ...state, showLoading: true });
+      axios
+        .post("http://localhost:4000/app/signup", state)
+        .then((res) => console.log(res.data, "res~~~"))
+        .then(() => setState({ ...state, showLoading: true }))
+        .then(() => history.push("/signIn"));
+    }
   };
 
+  const validation = (fieldName) => {
+    return state[fieldName] ? null : (
+      <span style={{ color: "red" }}>required</span>
+    );
+  };
+
+  const disabled = () => {
+    return !(
+      firstName.length > 1 &&
+      lastName.length > 1 &&
+      email.length > 1 &&
+      phone.length > 1 &&
+      password.length > 1
+    );
+  };
   return (
     <div className={style.container}>
       <h1>SignUp</h1>
+      {state.showLoading ? <CommonLoading /> : null}
       <div className={style.form}>
         <label>
           <span>First Name</span>
@@ -29,6 +60,7 @@ const SignUp = () => {
             type={"text"}
             name={"firstName"}
           />
+          {validation("firstName")}
         </label>
         <label>
           <span>Last name</span>
@@ -38,6 +70,7 @@ const SignUp = () => {
             type={"text"}
             name={"lastName"}
           />
+          {validation("lastName")}
         </label>
         <label>
           <span>Email</span>
@@ -47,6 +80,7 @@ const SignUp = () => {
             type={"email"}
             name={"email"}
           />
+          {validation("email")}
         </label>
         <label>
           <span>Phone</span>
@@ -56,6 +90,7 @@ const SignUp = () => {
             type={"number"}
             name={"phone"}
           />
+          {validation("phone")}
         </label>
         <label>
           <span>Password</span>
@@ -65,12 +100,13 @@ const SignUp = () => {
             type={"password"}
             name={"password"}
           />
+          {validation("password")}
         </label>
         <div className={style.buttons}>
           <button>Cancel</button>
-          <Link to={"/signIn"}>
-            <button onClick={signUpFunc}>SignUp</button>
-          </Link>
+          <button disabled={disabled()} onClick={signUpFunc}>
+            SignUp
+          </button>
         </div>
       </div>
     </div>

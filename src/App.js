@@ -1,27 +1,20 @@
 import React from "react";
-import SignUp from "./pages/SignUp";
+import SignUp from "./auth/SignUp";
 import "../src/assets/styles/global.scss";
-import { Route, Link } from "react-router-dom";
-import SignIn from "./pages/SignIn";
+import { Route } from "react-router-dom";
+import SignIn from "./auth/SignIn";
+import UserProfile from "./pages/UserProfile";
+import Navigation from "./components/Navigation";
+import FindUsers from "./pages/FindUsers";
 
 const App = () => {
   return (
     <div className="App">
-      <div>
-        <Link to={"/signin"}>
-          <button>SignIn</button>
-        </Link>
-        <Link to={"/signup"}>
-          <button>SignUp</button>
-        </Link>
-      </div>
-
-      <Route exact path={"/signup"}>
-        <SignUp />
-      </Route>
-      <Route exact path={"/signin"}>
-        <SignIn />
-      </Route>
+      <Navigation />
+      <Route exact path={"/signup"} component={SignUp} />
+      <Route exact path={"/signin"} component={SignIn} />
+      <Route exect path={"/userprofile"} component={UserProfile} />
+      <Route exect path={"/homeReducer"} component={FindUsers} />
     </div>
   );
 };
