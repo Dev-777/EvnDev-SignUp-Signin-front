@@ -5,6 +5,21 @@
   font-family: Montserrat, serif;
 }
 
-body{
-  padding: 10px 20px;
+
+a{
+  text-decoration: none !important;
+  color: white !important;
+}
+
+.link-router{
+  padding: 8px 16px;
+}
+.App{
+  height: 90vh;
+}
+label {
+  font-size: 24px;
+}
+input{
+  font-size: 17px !important;
 }

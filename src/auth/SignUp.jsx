@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import style from "../assets/styles/signUp.module.scss";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { CommonLoading } from "react-loadingg";
+import Input from "../components/Input";
 
 const SignUp = () => {
   const history = useHistory();
@@ -26,7 +26,6 @@ const SignUp = () => {
       setState({ ...state, showLoading: true });
       axios
         .post("http://localhost:4000/app/signup", state)
-        .then((res) => console.log(res.data, "res~~~"))
         .then(() => setState({ ...state, showLoading: true }))
         .then(() => history.push("/signIn"));
     }
@@ -47,66 +46,67 @@ const SignUp = () => {
       password.length > 1
     );
   };
+
   return (
-    <div className={style.container}>
-      <h1>SignUp</h1>
-      {state.showLoading ? <CommonLoading /> : null}
-      <div className={style.form}>
-        <label>
-          <span>First Name</span>
-          <input
-            onChange={onchangeFunc}
-            placeholder={"First name"}
-            type={"text"}
+    <div className={"bg-secondary h-100 d-flex justify-content-center "}>
+      <div
+        className={
+          "bg-light w-25 h-75 mt-5  d-flex flex-column align-items-center rounded p-4"
+        }
+      >
+        <h1 className={"mt-1 mb-3"}>SignUp</h1>
+        {state.showLoading ? <CommonLoading /> : null}
+        <div className={"d-flex flex-column w-100"}>
+          <Input
             name={"firstName"}
-          />
-          {validation("firstName")}
-        </label>
-        <label>
-          <span>Last name</span>
-          <input
-            onChange={onchangeFunc}
-            placeholder={"Last name"}
             type={"text"}
+            placeholder={"FirstName"}
+            onchangeFunc={onchangeFunc}
+            validation={validation}
+          />
+          <Input
             name={"lastName"}
+            type={"text"}
+            placeholder={"LastName"}
+            onchangeFunc={onchangeFunc}
+            validation={validation}
           />
-          {validation("lastName")}
-        </label>
-        <label>
-          <span>Email</span>
-          <input
-            onChange={onchangeFunc}
-            placeholder={"Email"}
-            type={"email"}
+          <Input
             name={"email"}
+            type={"email"}
+            placeholder={"Email"}
+            onchangeFunc={onchangeFunc}
+            validation={validation}
           />
-          {validation("email")}
-        </label>
-        <label>
-          <span>Phone</span>
-          <input
-            onChange={onchangeFunc}
-            placeholder={"Phone"}
-            type={"number"}
+          <Input
             name={"phone"}
+            type={"number"}
+            placeholder={"Phone"}
+            onchangeFunc={onchangeFunc}
+            validation={validation}
           />
-          {validation("phone")}
-        </label>
-        <label>
-          <span>Password</span>
-          <input
-            onChange={onchangeFunc}
-            placeholder={"Password"}
-            type={"password"}
+          <Input
             name={"password"}
+            type={"password"}
+            placeholder={"Password"}
+            onchangeFunc={onchangeFunc}
+            validation={validation}
           />
-          {validation("password")}
-        </label>
-        <div className={style.buttons}>
-          <button>Cancel</button>
-          <button disabled={disabled()} onClick={signUpFunc}>
-            SignUp
-          </button>
+
+          <div className={"d-flex mt-3 justify-content-end "}>
+            <button
+              className={"btn btn-lg btn-default bg-secondary mr-4 text-light"}
+            >
+              Cancel
+            </button>
+            <button
+              className={"btn btn-lg btn-default bg-success mr-4 text-light"}
+              disabled={disabled()}
+              onClick={signUpFunc}
+            >
+              SignUp
+            </button>
+          </div>
         </div>
       </div>
     </div>
