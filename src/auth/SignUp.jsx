@@ -60,6 +60,7 @@ const SignUp = () => {
           <Input
             name={"firstName"}
             type={"text"}
+            label={"FirstName"}
             placeholder={"FirstName"}
             onchangeFunc={onchangeFunc}
             validation={validation}
@@ -68,6 +69,7 @@ const SignUp = () => {
             name={"lastName"}
             type={"text"}
             placeholder={"LastName"}
+            label={"LastName"}
             onchangeFunc={onchangeFunc}
             validation={validation}
           />
@@ -75,6 +77,7 @@ const SignUp = () => {
             name={"email"}
             type={"email"}
             placeholder={"Email"}
+            label={"Email"}
             onchangeFunc={onchangeFunc}
             validation={validation}
           />
@@ -82,6 +85,7 @@ const SignUp = () => {
             name={"phone"}
             type={"number"}
             placeholder={"Phone"}
+            label={"Phone"}
             onchangeFunc={onchangeFunc}
             validation={validation}
           />
@@ -89,6 +93,7 @@ const SignUp = () => {
             name={"password"}
             type={"password"}
             placeholder={"Password"}
+            label={"Password"}
             onchangeFunc={onchangeFunc}
             validation={validation}
           />

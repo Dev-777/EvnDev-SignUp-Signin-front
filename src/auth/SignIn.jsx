@@ -52,15 +52,16 @@ const SignIn = () => {
             name={"email"}
             type={"email"}
             placeholder={"Email"}
+            label={"Email"}
             onchangeFunc={onchangeFunc}
           />
           <Input
             name={"password"}
             type={"password"}
             placeholder={"Password"}
+            label={"Password"}
             onchangeFunc={onchangeFunc}
           />
-
           <div className={"d-flex mt-3 justify-content-end "}>
             <button
               className={"btn btn-lg btn-default bg-secondary mr-4 text-light"}
